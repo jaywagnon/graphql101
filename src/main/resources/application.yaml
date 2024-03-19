@@ -1,0 +1,19 @@
+server:
+  port: ${PORT:9000}
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:graphql101
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+    # Defers loading data until after Hibernate has initialized and created the DB schema from entities
+    defer-datasource-initialization: true
+
+  h2:
+    # Open http://localhost:9000/h2-console in a browser to manage the in-memory database
+    console.enabled: true

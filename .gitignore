@@ -34,6 +34,7 @@ build/
 /.mvn/wrapper/MavenWrapperDownloader.java
 /uploads/onboarding.jpeg
 
+coverage
 .env*
 *.orig
 .DS_Store
