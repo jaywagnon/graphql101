@@ -1,0 +1,8 @@
+schema {
+    query: Query
+}
+
+type Query {
+    "Simply returns 'true'.  A no-op query to satisfy the minimum requirements for a GraphQL schema."
+    gql101HealthCheck: Boolean!
+}
