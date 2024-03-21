@@ -4,10 +4,14 @@ schema {
 
 type Author {
     name: String!
+
+    books: [Book!]!
 }
 
 type Book {
     name: String!
+
+    author: Author!
 }
 
 type Query {
