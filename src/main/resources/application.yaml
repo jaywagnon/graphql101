@@ -2,6 +2,9 @@ server:
   port: ${PORT:9000}
 
 spring:
+  main:
+    banner-mode: off
+
   datasource:
     url: jdbc:h2:mem:graphql101
     username: sa
@@ -18,8 +21,14 @@ spring:
       # We will handle table creation in a schema file
       ddl-auto: none
 
-
   h2:
     # Open http://localhost:9000/h2-console in a browser to manage the in-memory database.  Use the url, username
     # and password defined above to log in.
     console.enabled: true
+
+logging:
+  level:
+    root: ${LOG_LEVEL_ROOT:INFO}
+    org.hibernate.SQL: ${LOG_LEVEL_DATABASE:WARN}
+    org.hibernate.orm.jdbc.bind: ${LOG_LEVEL_DATABASE_BIND:OFF}
+
