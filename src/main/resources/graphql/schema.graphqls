@@ -2,7 +2,23 @@ schema {
     query: Query
 }
 
+type Author {
+    id: Int!
+    name: String!
+}
+
+type Book {
+    id: Int!
+    name: String!
+}
+
 type Query {
-    "Simply returns 'true'."
+    "Simply returns 'true'.  A no-op query to satisfy the minimum requirements for a GraphQL schema."
     healthCheck: Boolean!
+
+    getAuthors: [Author!]!
+    getAuthorById(id: Int!): Author!
+
+    getBooks: [Book!]!
+    getBookById(id: Int!): Book!
 }
