@@ -2,7 +2,19 @@ schema {
     query: Query
 }
 
+type Author {
+    name: String!
+}
+
+type Book {
+    name: String!
+}
+
 type Query {
     "Simply returns 'true'.  A no-op query to satisfy the minimum requirements for a GraphQL schema."
-    gql101HealthCheck: Boolean!
+    healthCheck: Boolean!
+
+    getAuthors: [Author!]!
+
+    getBooks: [Book!]!
 }
