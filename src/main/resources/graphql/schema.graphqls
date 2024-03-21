@@ -1,0 +1,8 @@
+schema {
+    query: Query
+}
+
+type Query {
+    "Simply returns 'true'."
+    healthCheck: Boolean!
+}
