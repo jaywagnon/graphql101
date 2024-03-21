@@ -17,8 +17,8 @@ type Query {
     healthCheck: Boolean!
 
     getAuthors: [Author!]!
-    getAuthorById(id: Int!): Author!
+    getAuthorById(id: Int!): Author
 
     getBooks: [Book!]!
-    getBookById(id: Int!): Book!
+    getBookById(id: Int!): Book
 }

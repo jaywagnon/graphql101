@@ -134,10 +134,10 @@ Add the following to the `Query` type in the GraphQL schema:
 ```graphql
 type Query {
     getAuthors: [Author!]!
-    getAuthorById(id: Int!): Author!
+    getAuthorById(id: Int!): Author
 
     getBooks: [Book!]!
-    getBookById(id: Int!): Book!
+    getBookById(id: Int!): Book
 }
 ```
 
@@ -258,7 +258,7 @@ The response should have a `200 - OK` status code and the following payload (cli
 
 The `Query` declaration for `getAuthorById` takes a non-null input parameter `id` of scalar type `Int`.
 
-`getAuthorById(id: Int!): Author!`
+`getAuthorById(id: Int!): Author`
 
 To specify the value of the input parameter, you send a JSON structure with the key name `variables` in the request body.  Some HTTP clients like Postman or Insomnia handle this for you when you select `GraphQL` as the body format.
 
@@ -300,7 +300,7 @@ The response should have a `200 - OK` status code and the following payload:
 
 As with the `getAuthorById` query, the `getBookById` query also takes a non-null input parameter `id` of scalar type `Int`.
 
-`getBookById(id: Int!): Book!`
+`getBookById(id: Int!): Book`
 
 
 Using your preferred HTTP client, send a `POST` request to your application server's `/graphql` endpoint with the following body:
