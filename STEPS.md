@@ -405,7 +405,7 @@ query {
 > NOTE: We need to declare which fields we want in the related type.
 
 
-The response should have a `200 - OK` status code and the following payload (clipped for brevety)::
+The response should have a `200 - OK` status code and the following payload (clipped for brevety):
 
 ```json
 {
@@ -456,3 +456,104 @@ The response should have a `200 - OK` status code and the following payload (cli
 ```
 
 Note that each `Author` now includes a collection of their books and each `Book` includes its author.
+
+
+# Enumerations
+
+Some fields may need to be restricted to a predictable set of values.  A special `enum` declaration can be used to define these value sets.
+
+## Define the Enumeration in the Schema
+
+### 1. Add the `enum` declaration to the schema
+
+Add the following to the GraphQL schema:
+
+```graphql
+enum Genre {
+    ROMANCE,
+    FICTION,
+    FANTASY,
+    SCI_FI
+}
+```
+
+### 2. Include the `Genre` type in the `Book` type declaration
+
+Change the `Book` type declaration to:
+
+```graphql
+type Book {
+    id: Int!
+    name: String!
+    genre: Genre!
+    author: Author!
+}
+```
+
+> NOTE: A matching Java `enum` class for `Genre` already exists in the application and the example data already includes the values.
+
+### 3. Add a `Query` to fetch books by `Genre`
+
+Add the following to the `Query` type declaration:
+
+```graphql
+type Query {
+    getBooksByGenre(genre: Genre!): [Book!]!
+}
+```
+
+### 4. Add a resolver for the `getBooksByGenre` query
+
+Add the following method to the `BookResolver` class:
+
+```java
+  @QueryMapping
+  public List<Book> getBooksByGenre(@Argument Genre genre) {
+      return bookService.getAllByGenre(genre);
+  }
+```
+
+
+## Testing the Enumeration
+
+
+### 1. Start up the application server
+
+
+### 2. Send a GraphQL request to the application server
+
+Using your preferred HTTP client, send a `POST` request to your application server's `/graphql` endpoint with the following body:
+
+`POST - http://localhost:9000/graphql`
+```graphql
+query($genre: Genre!) {
+    getBooksByGenre(genre: $genre) {
+        name
+        genre
+    }
+}
+```
+
+
+The response should have a `200 - OK` status code and the following payload:
+
+```json
+{
+    "data": {
+        "getBooksByGenre": [
+            {
+                "name": "Frankenstein",
+                "genre": "SCI_FI"
+            },
+            {
+                "name": "The Invisible Man",
+                "genre": "SCI_FI"
+            },
+            {
+                "name": "The Time Machine",
+                "genre": "SCI_FI"
+            }
+        ]
+    }
+}
+```
