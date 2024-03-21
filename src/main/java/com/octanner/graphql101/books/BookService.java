@@ -20,6 +20,10 @@ public class BookService {
         return bookRepository.findById(String.valueOf(id));
     }
 
+    public List<Book> getAllByGenre(Genre genre) {
+        return bookRepository.findAllByGenre(genre.name());
+    }
+
     public Book save(Book book) {
         Book _book = book;
 
