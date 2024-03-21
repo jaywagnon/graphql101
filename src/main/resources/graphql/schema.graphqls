@@ -2,15 +2,23 @@ schema {
     query: Query
 }
 
-type Author {
-    name: String!
+enum Genre {
+    ROMANCE,
+    FICTION,
+    FANTASY,
+    SCI_FI
+}
 
+type Author {
+    id: Int!
+    name: String!
     books: [Book!]!
 }
 
 type Book {
+    id: Int!
     name: String!
-
+    genre: Genre!
     author: Author!
 }
 

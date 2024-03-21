@@ -25,6 +25,9 @@ public class Book {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String genre;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
