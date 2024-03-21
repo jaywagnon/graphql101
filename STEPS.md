@@ -334,3 +334,125 @@ The response should have a `200 - OK` status code and the following payload:
     }
 }
 ```
+
+
+# Adding Relationships Between `types`
+
+The `Author` and `Book` data have a one-to-many relationship in the data.  This relationship can be expressed in the GraphQL schema.  Indeed, this is one of the primary benefits of using GraphQL.
+
+> NOTE: The Spring GraphQL library can automatically handle fetching and rendering the related data.  There will be no need to change the resolvers.
+
+## Define the Relationship in the Schema
+
+### 1. Add a relationship to `Book` in the `Author` type.
+
+Change the `Author` type declaration to:
+
+```graphql
+type Author {
+    id: Int!
+    name: String!
+    books: [Book!]!
+}
+```
+
+This adds a non-null collection of non-null `Book` types.
+
+### 2. Add a relationship to `Author` in the `Book` type.
+
+Change the `Author` type declaration to:
+
+```graphql
+type Book {
+    id: Int!
+    name: String!
+    author: Author!
+}
+```
+
+## Testing the relationship
+
+To request related data, simply add the nested `type` to the query body.
+
+### 1. Start up the application server
+
+
+### 2. Send a GraphQL request for all data to the application server
+
+Using your preferred HTTP client, send a `POST` request to your application server's `/graphql` endpoint with the following body:
+
+`POST - http://localhost:9000/graphql`
+```graphql
+query {
+    getAuthors {
+        id
+        name
+        books {
+            name
+        }
+    }
+
+    getBooks {
+        id
+        name
+        author {
+            name
+        }
+    }
+}
+```
+
+> NOTE: We need to declare which fields we want in the related type.
+
+
+The response should have a `200 - OK` status code and the following payload (clipped for brevety)::
+
+```json
+{
+    "data": {
+        "getAuthors": [
+            {
+                "id": 1,
+                "name": "Jane Austen",
+                "books": [
+                    {
+                        "name": "Pride and Prejudice"
+                    },
+                    {
+                        "name": "Persuasion"
+                    }
+                ]
+            },
+            ...
+            {
+                "id": 6,
+                "name": "Lewis Carroll",
+                "books": [
+                    {
+                        "name": "Alice's Adventures in Wonderland & Through the Looking-Glass"
+                    }
+                ]
+            }
+        ],
+        "getBooks": [
+            {
+                "id": 1,
+                "name": "Pride and Prejudice",
+                "author": {
+                    "name": "Jane Austen"
+                }
+            },
+            ...
+            {
+                "id": 9,
+                "name": "Alice's Adventures in Wonderland & Through the Looking-Glass",
+                "author": {
+                    "name": "Lewis Carroll"
+                }
+            }
+        ]
+    }
+}
+```
+
+Note that each `Author` now includes a collection of their books and each `Book` includes its author.

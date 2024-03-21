@@ -5,11 +5,13 @@ schema {
 type Author {
     id: Int!
     name: String!
+    books: [Book!]!
 }
 
 type Book {
     id: Int!
     name: String!
+    author: Author!
 }
 
 type Query {
