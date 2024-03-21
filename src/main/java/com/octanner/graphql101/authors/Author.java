@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -27,5 +28,5 @@ public class Author {
     private String name;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 }
