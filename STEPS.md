@@ -1,3 +1,5 @@
+# Adding Basic GraphQL Support
+
 ## Creating the GraphQL Schema
 
 The schema defines what data is available from the GraphQL service and what actions can be performed on that data.
@@ -79,3 +81,4 @@ The response should have a `200 - OK` status code and the following payload:
         "healthCheck": true
     }
 }
+```
