@@ -1,4 +1,5 @@
 schema {
+    mutation: Mutation
     query: Query
 }
 
@@ -15,6 +16,10 @@ type Author {
     books: [Book!]!
 }
 
+input AuthorInput {
+    name: String!
+}
+
 type Book {
     id: Int!
     name: String!
@@ -22,8 +27,14 @@ type Book {
     author: Author!
 }
 
+input BookInput {
+    name: String!
+    genre: Genre!
+    authorId: Int!
+}
+
 type Query {
-    "Simply returns 'true'."
+    "Simply returns 'true'.  A no-op query to satisfy the minimum requirements for a GraphQL schema."
     healthCheck: Boolean!
 
     getAuthors: [Author!]!
@@ -32,4 +43,12 @@ type Query {
     getBooks: [Book!]!
     getBookById(id: Int!): Book
     getBooksByGenre(genre: Genre!): [Book!]!
+}
+
+type Mutation {
+    addAuthor(input: AuthorInput!): Author!
+    editAuthor(id: Int!, input: AuthorInput!): Author!
+
+    addBook(input: BookInput!): Book!
+    editBook(id: Int!, input: BookInput!): Book!
 }
