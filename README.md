@@ -55,8 +55,7 @@ in a browser.  The page should show "status: UP".
 To verify that the in-memory database is running, open http://localhost:9000/h2-console 
 in a browser.  A log-in page should be displayed.  Use `sa` as the username and 
 `jdbc:h2:mem:graphql101` as the JDBC URL (there is no password).  You should see 
-the in-memory database with several tables: `authors`, `books` and `libraries`.  
-Each table should have some pre-defined data.
+the in-memory database with a few tables. Each table should have some pre-defined data.
 
 You can stop the application by pressing `CTRL-C`.
 
