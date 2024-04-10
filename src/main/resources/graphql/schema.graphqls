@@ -34,7 +34,7 @@ input BookInput {
 }
 
 type Query {
-    "Simply returns 'true'.  A no-op query to satisfy the minimum requirements for a GraphQL schema."
+    "Simply returns 'true'."
     healthCheck: Boolean!
 
     getAuthors: [Author!]!
