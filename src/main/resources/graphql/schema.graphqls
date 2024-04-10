@@ -13,7 +13,7 @@ type Book {
 }
 
 type Query {
-    "Simply returns 'true'.
+    "Simply returns 'true'."
     healthCheck: Boolean!
 
     getAuthors: [Author!]!
